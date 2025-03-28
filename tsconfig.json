@@ -1,11 +1,13 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "ES6",
+    "lib": ["ES5", "ES6", "DOM"],
     "module": "CommonJS",
     "outDir": "./dist",
     "strict": true,
     "baseUrl": "./",
+    "rootDir": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,

@@ -11,6 +11,7 @@ readdirSync(ROUTER_PATH).forEach(filename => {
   const cleanFilename = clearFilename(filename)
   if (cleanFilename !== 'index') {
     import(`./${cleanFilename}.router.ts`).then(routerModule => {
+      console.log(cleanFilename)
       router.use(`/${cleanFilename}`, routerModule.router)
     })
   }

@@ -9,7 +9,7 @@ const ENTITIES_PATH = path.join(
   '*.entity.{ts,js}',
 )
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'mysql',
   host: process.env.MYSQL_HOST,
   port: Number(process.env.MYSQL_PORT) || 3306,
