@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import { login, register } from '@/controllers/user.controller'
-import { authValidator } from '@/middlewares/validators'
+import { AuthDto } from '@/dtos/auth.dto'
+import { validate } from '@/middlewares/validators'
 
 const router = Router()
 
-router.post('/login', authValidator, login)
+router.post('/login', validate(AuthDto), login)
 
-router.post('/register', authValidator, register)
+router.post('/register', validate(AuthDto), register)
 
 export { router }

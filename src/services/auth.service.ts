@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { UserRepository } from '../repositories/user.repository'
+import { Token } from '@/config/token.config'
 import { AuthDto } from '@/dtos/auth.dto'
 
 export class AuthService {
@@ -26,11 +27,18 @@ export class AuthService {
     const { password, email } = data
 
     const user = await this.userRepository.findUserByEmail(email)
-    if (!user) throw new Error('User not found')
+    if (!user || !(await bcrypt.compare(password, user.password)))
+      throw new Error('User not found')
 
-    const isHasedPassword = await bcrypt.compare(password, user.password)
-    if (!isHasedPassword) throw new Error('Wrong password')
+    const payload = {
+      userId: user.id,
+    }
 
-    return user
+    const token = await Token.generate(payload)
+
+    return {
+      ...user,
+      token,
+    }
   }
 }
